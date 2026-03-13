@@ -11,10 +11,9 @@ public class EmailSender {
                                  String messageText) throws Exception {
 
         final String fromEmail = "vishalevoke27@gmail.com";
-        final String password = "wvic hncq gbcj bxdx"; // App password
+        final String password = "wvic hncq gbcj bxdx"; 
         final String toEmail = "vk368065@gmail.com";
 
-        // SMTP configuration
         Properties props = new Properties();
         props.put("mail.smtp.host", "smtp.gmail.com");
         props.put("mail.smtp.port", "587");
@@ -36,29 +35,22 @@ public class EmailSender {
 
         message.setSubject(subject);
 
-        // ✅ TEXT PART
         MimeBodyPart textPart = new MimeBodyPart();
         textPart.setText(messageText);
 
-        // ✅ IMAGE ATTACHMENT PART
         MimeBodyPart imagePart = new MimeBodyPart();
         String imagePaths = System.getProperty("user.dir")
                 + "/screenshots/signUp.png";
 
         imagePart.attachFile(new File(imagePaths));
-        
-//        imagePart.attachFile(new File("/automation-framework/screenshots/signUp.png"));
-
-        // ✅ MULTIPART EMAIL
+                
         Multipart multipart = new MimeMultipart();
         multipart.addBodyPart(textPart);
         multipart.addBodyPart(imagePart);
 
         message.setContent(multipart);
 
-        // Send email
         Transport.send(message);
 
-        System.out.println("✅ Email with image sent successfully");
     }
 }

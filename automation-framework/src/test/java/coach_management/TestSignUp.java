@@ -115,7 +115,7 @@ public class TestSignUp {
 		String countryCode="India";
 		String phoneNum="8218495333";
 		
-		String role="coach";// ,"gym-owner","influencer","nutritionist","other"
+		String role="gym-owner";// ,"gym-owner","influencer","nutritionist","other"
 		String clientRange="1";
 		String date="12-02-2026";
 		WebDriver driver=new ChromeDriver();
