@@ -17,6 +17,8 @@ public class BookDemo {
 	
 	private WebDriver driver;
 	   private Actions actions ;
+		  private WebDriverWait wait ;
+
 
 	
 	@FindBy(id="fullName")
@@ -30,21 +32,20 @@ public class BookDemo {
 	@FindBy(xpath="//*[@id=\"root\"]/div/div/main/div/div/div[2]/form/div[3]/div/div/input")
 	WebElement phoneNumEle;
 	
-	@FindBy(xpath="//*[@id=\"root\"]/div/div/main/div/div/div[2]/form/div[5]/button")
-	WebElement role;
 	
-	@FindBy(xpath="//*[@id=\"root\"]/div/div/main/div/div/div[2]/form/div[5]/select")
-	WebElement roleSelect;
 	
-	@FindBy(xpath="//*[@id=\"root\"]/div/div/main/div/div/div[2]/form/div[6]/button")
+	@FindBy(xpath="//*[@id=\"root\"]/div[1]/div[2]/main/div/div/div[2]/form/div[6]/button")
 	WebElement client;
-	@FindBy(xpath="//*[@id=\"root\"]/div/div/main/div/div/div[2]/form/div[6]/select")
+	@FindBy(xpath="//*[@id=\"root\"]/div[1]/div[2]/main/div/div/div[2]/form/div[6]/select")
 	WebElement clientSelect;
 	
-	@FindBy(id="demoDate")
-	WebElement date;
+	@FindBy(name="demoDate")
+	WebElement dateEle;
 	
-	@FindBy(xpath="//*[@id=\"root\"]/div/div/main/div/div/div[2]/form/button")
+	@FindBy(xpath="//*[@id=\"root\"]/div[1]/div[2]/main/div/div/div[2]/form/div[8]/div/button[2]")
+	WebElement timeEle;
+	
+	@FindBy(xpath="//*[@id=\"root\"]/div[1]/div[2]/main/div/div/div[2]/form/button")
 	WebElement demoBookEle;
 	
 	
@@ -53,6 +54,8 @@ public class BookDemo {
 		this.driver=driver;
 		   PageFactory.initElements(this.driver, this);
 		   actions=new Actions(this.driver);
+			  this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
 
 	}
 	
@@ -66,7 +69,7 @@ public class BookDemo {
 	 * @param date
 	 * @return
 	 */
-	public boolean bookDemo(String fullName ,String email,String country,String phoneNum,String clientRole,String clientRange ,String date )
+	public boolean bookDemo(String fullName ,String email,String country,String phoneNum,String clientRole,String clientRange ,String date,String time )
 	{
 		fullNameEle.sendKeys(fullName);
 		emailEle.sendKeys(email);
@@ -83,18 +86,38 @@ public class BookDemo {
 		 phoneNumEle.click();
 		 phoneNumEle.sendKeys(phoneNum);
 		  actions.moveToElement(demoBookEle).perform();
-
-		 
-		 
-		 role.click();
-		 Select select=new Select (roleSelect);
-		 select.selectByValue(clientRole);
+		  /*
+		   * Here add client role automation script
+		   */
+		
+		
 		 client.click();
-		 select=new Select(clientSelect);
+		Select select=new Select(clientSelect);
 		 select.selectByValue(clientRange);
+		 client.click();
+		 dateEle.sendKeys(date);
+		 wait.until(ExpectedConditions.elementToBeClickable(timeEle
+			    )).click();
+
+		
+		 String timeSlot=timeEle.getText();
+		 
+		 if(timeSlot.equalsIgnoreCase(time))
+		 {
+
+			 WebElement bookBtn = this.wait.until(
+			         ExpectedConditions.elementToBeClickable(
+			                 By.xpath("//button[normalize-space()='Book My Demo']")
+			         )
+			 );
+
+			 bookBtn.click();
+
+			 return true;
+		 }
 		
 		
-	 return true;	
+	 return false;	
 	}
 	
 

@@ -21,6 +21,7 @@ public class CoachSignUp {
 	private WebDriver driver;
 	   private Actions actions ;
 	  private WebDriverWait wait ;
+	  private String coachemail;
 
 	   
 	   
@@ -76,7 +77,7 @@ public class CoachSignUp {
 	   WebElement instaGram;
 	   @FindBy(name="youtube")
 	   WebElement youTube;
-	//   
+	   
 	   @FindBy(xpath="/html/body/div/div[1]/div[2]/div/main/div/div/div[2]/form/div[2]/button")
 	   WebElement next2;
 	   
@@ -86,11 +87,14 @@ public class CoachSignUp {
 	   @FindBy(id="uniqueServices")
 	   WebElement descriptionEle;
 	   
-	   @FindBy(xpath="//*[@id=\"root\"]/div/div/main/div/div/div[2]/form/div[2]/button[2]")
+	   @FindBy(xpath="//*[@id=\"root\"]/div[1]/div[2]/div/main/div/div/div[2]/form/div[2]/button[2]")
 	   WebElement next3;
 	   
-	   @FindBy(xpath="/html/body/div/div/div/main/div/div/div[2]/form/div[1]/div[2]/button")
+	   @FindBy(xpath="//*[@id=\"root\"]/div[1]/div[2]/div/main/div/div/div[2]/form/div[1]/div[2]/button")
 	   WebElement freeTrialEle;
+	   
+	   @FindBy(id="uniqueUrl")
+	   WebElement uniqueUrlEle;
 	   
 	   @FindBy(xpath="//*[@id=\"root\"]/div/div/main/div/div/div[2]/form/div[1]/div[1]/div/button[2]")
 	   WebElement tenureEle;
@@ -141,7 +145,7 @@ public class CoachSignUp {
 
 	   public void signUp(String firstName,String lastName ,String emails,String passWord , String reffralCode)
 	   {
-		   
+		   this.coachemail=emails;
 		  fName.click();
 		  fName.sendKeys(firstName);
 		  lName.click();
@@ -240,113 +244,136 @@ public class CoachSignUp {
 	       youTube.sendKeys(youtube);
     next2.click();  
     }
-	   public void signUp3(Map<String, String> serviceProvide,String description )
+	   public void signUp3(Map<String, String> serviceProvide,String description ) throws InterruptedException
 	   {
                 
-			  JavascriptExecutor js = (JavascriptExecutor) driver;
+			  JavascriptExecutor js = (JavascriptExecutor) this.driver;
 			  js.executeScript("window.scrollTo(0, 0)");
-			   this.wait.until(ExpectedConditions.visibilityOf(next3));
+			  Thread.sleep(2000);
+//			   this.wait.until(ExpectedConditions.visibilityOf(next3));
+			   for (int i = 1; i <= 3; i++) {
+				    if (serviceProvide.get(String.valueOf(i)) != null) {
+				        WebElement btn = driver.findElement(
+				            By.xpath("/html/body/div/div[1]/div[2]/div/main/div/div/div[2]/form/div[1]/div[1]/button[" + i + "]")
+				        );
 
-		      
-		   if(serviceProvide.get("1")!=(null))
-		   {  
-			   serviceProvider=this.driver.findElement(By.xpath("/html/body/div/div[1]/div[2]/div/main/div/div/div[2]/form/div[1]/div[1]/button[1]")); 
-			   serviceProvider.click();
-		   }
-		   if(serviceProvide.get("2")!=(null))
-		   {
-
-			   serviceProvider=this.driver.findElement(By.xpath("/html/body/div/div[1]/div[2]/div/main/div/div/div[2]/form/div[1]/div[1]/button[2]")); 
-			   serviceProvider.click();
-		   
-		   }
-		   if(serviceProvide.get("3")!=(null))
-		   {
-
-			   serviceProvider=this.driver.findElement(By.xpath("/html/body/div/div[1]/div[2]/div/main/div/div/div[2]/form/div[1]/div[1]/button[3]")); 
-			   serviceProvider.click();
-		   }
+				        wait.until(ExpectedConditions.elementToBeClickable(btn));
+				        btn.click();
+				    }
+				}
+		
 		   
 		   descriptionEle.click();
 		   descriptionEle.sendKeys(description);
 		   next3.click(); 
 	   }
-	   public void planSelect(String typePlan, String planName ,String tenure,String promoCode)
+	   public boolean planSelect(String typePlan, String planName ,String tenure,String promoCode,String bName)
 	   {
 		   if(typePlan.equalsIgnoreCase("YES"))
 		   {
 			  this. wait.until(ExpectedConditions.visibilityOf(freeTrialEle));
 
 			   freeTrialEle.click();
-		   }
-		   if(tenure.equalsIgnoreCase("Yearly"))
-		   {
-			   tenureEle.click();
+			   this.wait.until(ExpectedConditions.visibilityOf( uniqueUrlEle));
+			   uniqueUrlEle.click();
+			   uniqueUrlEle.sendKeys(bName);
+			   this.wait.until(ExpectedConditions.elementToBeClickable(this.driver.findElement(By.xpath("/html/body/div/div[1]/main/header/div[2]/button"))));
+			   this.driver.findElement(By.xpath("/html/body/div/div[1]/main/header/div[2]/button")).click();
+			   
+			   
+
+			   WebElement skipBtn = this.wait.until(
+			       ExpectedConditions.elementToBeClickable(By.xpath("//button[normalize-space()='Skip']"))
+			   );
+
+			   skipBtn.click();
+			   this.wait.until(ExpectedConditions.visibilityOf(this.driver.findElement(By.xpath("//*[@id=\"root\"]/div[1]/header/div/div[3]/div[2]/div[1]/button/img"))));
+
+			   WebElement profileIconEle=this.driver.findElement(By.xpath("//*[@id=\"root\"]/div[1]/header/div/div[3]/div[2]/div[1]/button/img"));
+			   profileIconEle.click();
+			   String coachEmail=this.driver.findElement(By.xpath("/html/body/div/div[1]/header/div/div[3]/div[2]/div[2]/div[1]/p[2]")).getText();
+			   if(coachEmail.equalsIgnoreCase( this.coachemail))
+			   {
+				   return true;
+			   }
+			   else
+			   {
+				   return false;
+			   }
+
 			   
 		   }
-			  this. wait.until(ExpectedConditions.visibilityOf(plan));
-
-		   plan.click();
-		   this.wait.until(ExpectedConditions.visibilityOf(ammountEle));
-		   StringBuilder ammount=new StringBuilder(ammountEle.getText().replaceAll("[^0-9]", ""));
-		   int temAm=Integer.parseInt(ammount.toString());
-		   if(!promoCode.equalsIgnoreCase(""))
-		   {
-			   promoCodeEle.click();
-			   promoCodeEle.sendKeys(promoCode);
-			   this.driver.findElement(By.xpath("/html/body/div[3]/div[2]/div[1]/div[1]/div[3]/div/button")).click();
-
-			   this. wait.until(ExpectedConditions.visibilityOf(paymentButton));
-			   this.wait.until(ExpectedConditions.visibilityOf(this.driver.findElement(By.xpath("/html/body/div[3]/div[2]/div[1]/div[1]/div[3]/div/button"))));
-			   this.wait.until(ExpectedConditions.visibilityOf(this.driver.findElement(By.xpath("/html/body/div[3]/div[2]/div[2]/div/div[1]/div[4]/div[2]/div/div[2]/div[1]"))));
-			   ammount=new StringBuilder(this.driver.findElement(By.xpath("/html/body/div[3]/div[2]/div[2]/div/div[1]/div[4]/div[2]/div/div[2]/div[1]")).getText().replaceAll("[^0-9]", ""));
-		   	   int ammountAfter=Integer.parseInt(ammount.toString());
-		   	   if(ammountAfter>0 && temAm!=ammountAfter)
-		   	   {
-		   		   this. wait.until(ExpectedConditions.visibilityOf(paymentButton));
-				   paymentButton.click();
-				   System.out.println("Before Promocode plan value = "+temAm);
-			   	   System.out.println("After = "+ammountAfter);
-
-
-		   	   }
-		   	   else
-		   	   {
-		   	  
-	   		   this. wait.until(ExpectedConditions.visibilityOf(paymentButton));
-
-			   paymentButton.click();
-		   	   }
-		   }
 		   else
-		   {
-			   this. wait.until(ExpectedConditions.visibilityOf(paymentButton));
-			   paymentButton.click();
-		  
-		   }
+			   return false;
 		   
+//		   if(tenure.equalsIgnoreCase("Yearly"))
+//		   {
+//			   tenureEle.click();
+//			   
+//		   }
+//			  this. wait.until(ExpectedConditions.visibilityOf(plan));
+//
+//		   plan.click();
+//		   this.wait.until(ExpectedConditions.visibilityOf(ammountEle));
+//		   StringBuilder ammount=new StringBuilder(ammountEle.getText().replaceAll("[^0-9]", ""));
+//		   int temAm=Integer.parseInt(ammount.toString());
+//		   if(!promoCode.equalsIgnoreCase(""))
+//		   {
+//			   promoCodeEle.click();
+//			   promoCodeEle.sendKeys(promoCode);
+//			   this.driver.findElement(By.xpath("/html/body/div[3]/div[2]/div[1]/div[1]/div[3]/div/button")).click();
+//
+//			   this. wait.until(ExpectedConditions.visibilityOf(paymentButton));
+//			   this.wait.until(ExpectedConditions.visibilityOf(this.driver.findElement(By.xpath("/html/body/div[3]/div[2]/div[1]/div[1]/div[3]/div/button"))));
+//			   this.wait.until(ExpectedConditions.visibilityOf(this.driver.findElement(By.xpath("/html/body/div[3]/div[2]/div[2]/div/div[1]/div[4]/div[2]/div/div[2]/div[1]"))));
+//			   ammount=new StringBuilder(this.driver.findElement(By.xpath("/html/body/div[3]/div[2]/div[2]/div/div[1]/div[4]/div[2]/div/div[2]/div[1]")).getText().replaceAll("[^0-9]", ""));
+//		   	   int ammountAfter=Integer.parseInt(ammount.toString());
+//		   	   if(ammountAfter>0 && temAm!=ammountAfter)
+//		   	   {
+//		   		   this. wait.until(ExpectedConditions.visibilityOf(paymentButton));
+//				   paymentButton.click();
+//				   System.out.println("Before Promocode plan value = "+temAm);
+//			   	   System.out.println("After = "+ammountAfter);
+//
+//
+//		   	   }
+//		   	   else
+//		   	   {
+//		   	  
+//	   		   this. wait.until(ExpectedConditions.visibilityOf(paymentButton));
+//
+//			   paymentButton.click();
+//		   	   }
+//		   }
+//		   else
+//		   {
+//			   this. wait.until(ExpectedConditions.visibilityOf(paymentButton));
+//			   paymentButton.click();
+//		  
+//		   }
+//		   
 
 		   	 
 		   
 		   
 		
-		   this.wait.until(ExpectedConditions.visibilityOf(this.driver.findElement(By.xpath("/html/body/div/div[1]/div/div[3]/div[1]/div[2]/div/div/div/form/div[1]/div/div[2]/label/input"))));
-		   this.driver.findElement(By.xpath("/html/body/div/div[1]/div/div[3]/div[1]/div[2]/div/div/div/form/div[1]/div/div[2]/label/input")).click();		
-		   this.driver.findElement(By.xpath("/html/body/div/div[1]/div/div[3]/div[1]/div[2]/div/div/div/form/div[1]/div/div[2]/label/input")).sendKeys("9999999999");
-		   emailEle.click();
-		   emailEle.sendKeys("xyz@yopmail.com");
-		   continueWeb.click();
-		   cardPayment.click();
-		   cardNumEle.click();
-		   cardNumEle.sendKeys("411111111");
-		   monthEle.click();
-		   monthEle.sendKeys("1230");
-		   cvvEle.click();
-		   cvvEle.sendKeys("123");
-		   cardHolderEle.click();
-		   cardHolderEle.sendKeys("TEST");
-		   continueElement.click();
-		   mayBeLater.click();  		   
+//		   this.wait.until(ExpectedConditions.visibilityOf(this.driver.findElement(By.xpath("/html/body/div/div[1]/div/div[3]/div[1]/div[2]/div/div/div/form/div[1]/div/div[2]/label/input"))));
+//		   this.driver.findElement(By.xpath("/html/body/div/div[1]/div/div[3]/div[1]/div[2]/div/div/div/form/div[1]/div/div[2]/label/input")).click();		
+//		   this.driver.findElement(By.xpath("/html/body/div/div[1]/div/div[3]/div[1]/div[2]/div/div/div/form/div[1]/div/div[2]/label/input")).sendKeys("9999999999");
+//		   emailEle.click();
+//		   emailEle.sendKeys("xyz@yopmail.com");
+//		   continueWeb.click();
+//		   cardPayment.click();
+//		   cardNumEle.click();
+//		   cardNumEle.sendKeys("411111111");
+//		   monthEle.click();
+//		   monthEle.sendKeys("1230");
+//		   cvvEle.click();
+//		   cvvEle.sendKeys("123");
+//		   cardHolderEle.click();
+//		   cardHolderEle.sendKeys("TEST");
+//		   continueElement.click();
+//		   mayBeLater.click();  		   
 	   }
 
 }

@@ -1,28 +1,30 @@
 -------------------------------------------------------------------------------
 Test set: TestSuite
 -------------------------------------------------------------------------------
-Tests run: 2, Failures: 2, Errors: 0, Skipped: 0, Time elapsed: 43.373 s <<< FAILURE! - in TestSuite
-coach_management.TestSignUp.bookDemo  Time elapsed: 9.582 s  <<< FAILURE!
+Tests run: 2, Failures: 2, Errors: 0, Skipped: 0, Time elapsed: 51.009 s <<< FAILURE! - in TestSuite
+coach_management.TestSignUp.bookDemo  Time elapsed: 34.594 s  <<< FAILURE!
 org.openqa.selenium.NoSuchElementException: 
-Cannot locate option with value: 1
-For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
-Build info: version: '4.30.0', revision: '509c7f17cc*'
-System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '23.0.2'
-Driver info: driver.version: unknown
-	at coach_management.TestSignUp.bookDemo(TestSignUp.java:128)
-
-coach_management.TestSignUp.signUp[1335, coach1773378454213@yopmail.com, chrome](1)  Time elapsed: 17.638 s  <<< FAILURE!
-org.openqa.selenium.TimeoutException: Expected condition failed: waiting for visibility of Proxy element for: DefaultElementLocator 'By.xpath: //*[@id="root"]/div/div/main/div/div/div[2]/form/div[2]/button[2]' (tried for 10 second(s) with 500 milliseconds interval)
-	at coach_management.TestSignUp.signUp(TestSignUp.java:84)
-Caused by: org.openqa.selenium.NoSuchElementException: 
-no such element: Unable to locate element: {"method":"xpath","selector":"//*[@id="root"]/div/div/main/div/div/div[2]/form/div[2]/button[2]"}
+no such element: Unable to locate element: {"method":"css selector","selector":"#fullName"}
   (Session info: chrome=145.0.7632.75)
 For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
 Build info: version: '4.30.0', revision: '509c7f17cc*'
 System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '23.0.2'
 Driver info: org.openqa.selenium.chrome.ChromeDriver
-Command: [5b8472066254e620d416f585539ff522, findElement {value=//*[@id="root"]/div/div/main/div/div/div[2]/form/div[2]/button[2], using=xpath}]
-Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 145.0.7632.75, chrome: {chromedriverVersion: 145.0.7632.117 (de4e5d6e13b..., userDataDir: C:\Users\vk368\AppData\Loca...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:62378}, goog:processID: 45580, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:62378/devtoo..., se:cdpVersion: 145.0.7632.75, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
-Session ID: 5b8472066254e620d416f585539ff522
-	at coach_management.TestSignUp.signUp(TestSignUp.java:84)
+Command: [0c164ff5c1f087758f4b7b64bd7f98b3, findElement {using=id, value=fullName}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 145.0.7632.75, chrome: {chromedriverVersion: 145.0.7632.117 (de4e5d6e13b..., userDataDir: C:\Users\vk368\AppData\Loca...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:52756}, goog:processID: 27912, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:52756/devtoo..., se:cdpVersion: 145.0.7632.75, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 0c164ff5c1f087758f4b7b64bd7f98b3
+	at coach_management.TestSignUp.bookDemo(TestSignUp.java:128)
+
+coach_management.TestSignUp.tearDown[[TestResult name=bookDemo status=FAILURE method=TestSignUp.bookDemo()[pri:0, instance:coach_management.TestSignUp@e056f20] output={null}]](0)  Time elapsed: 42.123 s  <<< FAILURE!
+org.openqa.selenium.NoSuchSessionException: 
+invalid session id: session deleted as the browser has closed the connection
+from disconnected: not connected to DevTools
+  (Session info: chrome=145.0.7632.75)
+Build info: version: '4.30.0', revision: '509c7f17cc*'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '23.0.2'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [0c164ff5c1f087758f4b7b64bd7f98b3, screenshot {}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 145.0.7632.75, chrome: {chromedriverVersion: 145.0.7632.117 (de4e5d6e13b..., userDataDir: C:\Users\vk368\AppData\Loca...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:52756}, goog:processID: 27912, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:52756/devtoo..., se:cdpVersion: 145.0.7632.75, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 0c164ff5c1f087758f4b7b64bd7f98b3
+	at coach_management.TestSignUp.tearDown(TestSignUp.java:98)
 

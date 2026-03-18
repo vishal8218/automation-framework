@@ -5,7 +5,6 @@
     <classes>
       <class name="coach_management.TestSignUp">
         <methods>
-          <include name="signUp" invocation-numbers="0"/>
           <include name="bookDemo"/>
           <include name="tearDown"/>
         </methods>
