@@ -1,55 +1,66 @@
 package api_testing;
 
-import org.json.JSONException;
-import org.json.JSONObject;
+
+ import org.json.JSONObject;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import io.restassured.response.Response;
-import static io.restassured.RestAssured.*;
+ import io.restassured.response.Response;
+ import static io.restassured.RestAssured.*;
 
-public class LoginAPI {
-	
-	
-	
-	  @Test
-	    public void login() throws JSONException {
-		  baseURI = "https://beta.btrainr.com";
 
-	        JSONObject body = new JSONObject();
-	        body.put("email", "testing1137@yopmail.com");
-	        body.put("password", "Qwerty@123");
-	        body.put("verificationType", "password");
-	        body.put("authMethod", "email");
-	        body.put("deviceType", "web");
 
-	        // Send POST request
-	        Response response =
-	            given()
-	                .header("Content-Type", "application/json")
-	                .body(body.toString())
-	            .when()
-	                .post("/api/auths/login");
+ public class LoginAPI {
 
-	        // Print full response
-	        System.out.println("===== FULL RESPONSE =====");
-	        response.prettyPrint();
+ @Test public void login()  {
+ baseURI = "http://localhost:8448/";
+ JSONObject body = new JSONObject();
+ body.put("userEmailId", "vk368065@gmail.com");
+ body.put("password", "1234");
+ 
 
-	        // Status Code
-	        int statusCode = response.getStatusCode();
-	        System.out.println("Status Code: " + statusCode);
+ Response response =
+ given()
+ .header("Content-Type", "application/json")
+ .queryParam("otp", "6485")
+ .when()
+ .post("verifyotp");
+ 
+ 
+ 
+ 
 
-	        // Extract values (update keys based on actual response)
-	        String token = response.jsonPath().getString("data.session.accessToken");
-	        String userId = response.jsonPath().getString("data.id");
-	        String email = response.jsonPath().getString("data.email");
+ System.out.println("===== FULL RESPONSE =====");
+ response.prettyPrint();
 
-	        // Print extracted values
-	        System.out.println("Access Token: " + token);
-	        System.out.println("User ID: " + userId);
-	        System.out.println("Email: " + email);
-		 
-	       	 
-	  
-}
-	  
-}
+
+ 
+ 
+// String token = response.jsonPath().getString("token");
+// System.out.println("Token Extracted : "+token);
+// JSONObject body2 = new JSONObject();
+// body2.put("senderId","982fcbcd-f670-4c93-8f43-385d591c7463");
+// body2.put("reciverId", "ce509a25-5c41-4bab-9066-4896d0c44157");
+// Response response2 =
+//		 given()
+//		   
+//		     .headers(
+//		         "Authorization",   token,
+//		         "Content-Type", "application/json"
+//		     )
+//		     .body(body2.toString())
+//		 .when()
+//		     .post("get_messages");
+//
+//		 response2.prettyPrint();
+//		 Map<String, List<String>> data = response2.jsonPath().getMap("");
+//		 System.out.println("Status Code: " + response2.getStatusCode());
+//		 System.out.println(response2.jsonPath().getString("messageContent"));
+//
+//
+
+
+
+ }
+
+ }

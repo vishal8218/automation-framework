@@ -23,7 +23,7 @@ public class CoachSignUp {
 	  private WebDriverWait wait ;
 	  private String coachemail;
 
-	   
+	  
 	   
 	   public CoachSignUp(WebDriver driver)
 	   {
@@ -67,10 +67,6 @@ public class CoachSignUp {
 	    @FindBy(xpath="//*[@id=\"root\"]/div[1]/div[2]/div/main/div/div/div[2]/form/div[1]/div[3]/select")
 	    WebElement currencySelectEle;
 	   
-	   @FindBy(xpath="/html/body/div/div/div/main/div/div/div[2]/form/div[1]/div[6]/select")
-	   WebElement numClients;
-	   
-	  
 	   
 	   @FindBy(name="instagram")
 	   
@@ -81,8 +77,7 @@ public class CoachSignUp {
 	   @FindBy(xpath="/html/body/div/div[1]/div[2]/div/main/div/div/div[2]/form/div[2]/button")
 	   WebElement next2;
 	   
-	   @FindBy(xpath="//*[@id=\"Group Coaching / Challenges\"]")
-	   WebElement serviceProvider;
+	
 	   
 	   @FindBy(id="uniqueServices")
 	   WebElement descriptionEle;
@@ -99,7 +94,8 @@ public class CoachSignUp {
 	   @FindBy(xpath="//*[@id=\"root\"]/div/div/main/div/div/div[2]/form/div[1]/div[1]/div/button[2]")
 	   WebElement tenureEle;
 	   
-	   @FindBy(xpath="//*[@id=\"root\"]/div/div/main/div/div/div[2]/form/div[1]/div[3]/div[1]") //2- pro ,1-professional
+	   
+	   @FindBy(xpath="/html/body/div/div[1]/div[2]/div/main/div/div/div[2]/form/div[1]/div[3]/div[1]/div[2]/div[2]") //2- pro ,1-professional
 	   
 	   WebElement plan;
 	   
@@ -111,7 +107,7 @@ public class CoachSignUp {
 	   @FindBy(xpath="/html/body/div[3]/div[2]/div[1]/div[1]/div[3]/div/button")
 	   WebElement applyEle;
 	   
-	   @FindBy(xpath="/html/body/div[3]/div[2]/div[2]/div/div[2]/button")
+	   @FindBy(xpath="//button[@type='button' and contains(.,'Proceed to Payment')]")
 	   WebElement paymentButton;
 	   @FindBy(xpath="/html/body/div/div[1]/div/div[3]/div[1]/div[2]/div/div/div/form/div[1]/div/div[2]/label/input")
 	   WebElement phoneEle;
@@ -142,6 +138,11 @@ public class CoachSignUp {
 	   @FindBy(xpath="/html/body/div/div[3]/div/div/div/div/div/div/div/div/div[2]/button[1]")
 	   WebElement mayBeLater;
 	   
+	   @FindBy(xpath="//*[@id=\"root\"]/div[1]/div/aside/div/nav/div[1]/ul/li[3]/a/span[2]")
+	   WebElement clientTab;
+	   
+	   @FindBy(xpath="//*[@id=\"root\"]/div[1]/div/main/div/div/div[1]/div[2]/div[4]/button")
+	   WebElement temp;
 
 	   public void signUp(String firstName,String lastName ,String emails,String passWord , String reffralCode)
 	   {
@@ -158,7 +159,7 @@ public class CoachSignUp {
 		 
 		  pass.click();
 		  pass.sendKeys(passWord);
-//		  referralCode.click();
+//	  referralCode.click();
 //		  referralCode.sendKeys(reffralCode);
 		  next.click();
 		 
@@ -221,46 +222,19 @@ public class CoachSignUp {
 	       
 	       
 	       }
-	       
-
-
-			  WebElement dropdown = wait.until(
-				        ExpectedConditions.elementToBeClickable(
-				            By.xpath("//label[contains(text(),'Approximate Number of Active Clients')]/following::button[@role='combobox'][1]")
-				        )
-				    );
-
-				    dropdown.click();
-
-				    // Click option dynamically
-				    wait.until(ExpectedConditions.elementToBeClickable(
-				        By.xpath("//div[@role='option' and normalize-space()='" + clinet + "']")
-				    )).click();
-	     
-	      
 	       instaGram.click();
 	       instaGram.sendKeys(insta);
 	       youTube.click();
 	       youTube.sendKeys(youtube);
     next2.click();  
     }
-	   public void signUp3(Map<String, String> serviceProvide,String description ) throws InterruptedException
+	   public void signUp3(String description ) throws InterruptedException
 	   {
                 
 			  JavascriptExecutor js = (JavascriptExecutor) this.driver;
 			  js.executeScript("window.scrollTo(0, 0)");
-			  Thread.sleep(2000);
-//			   this.wait.until(ExpectedConditions.visibilityOf(next3));
-			   for (int i = 1; i <= 3; i++) {
-				    if (serviceProvide.get(String.valueOf(i)) != null) {
-				        WebElement btn = driver.findElement(
-				            By.xpath("/html/body/div/div[1]/div[2]/div/main/div/div/div[2]/form/div[1]/div[1]/button[" + i + "]")
-				        );
-
-				        wait.until(ExpectedConditions.elementToBeClickable(btn));
-				        btn.click();
-				    }
-				}
+			  Thread.sleep(100);
+			   
 		
 		   
 		   descriptionEle.click();
@@ -287,13 +261,14 @@ public class CoachSignUp {
 			   );
 
 			   skipBtn.click();
-			   this.wait.until(ExpectedConditions.visibilityOf(this.driver.findElement(By.xpath("//*[@id=\"root\"]/div[1]/header/div/div[3]/div[2]/div[1]/button/img"))));
+			   this.wait.until(ExpectedConditions.visibilityOf(this.driver.findElement(By.xpath("/html/body/div/div[1]/header/div/div[3]/div[2]/div[1]/button"))));
 
-			   WebElement profileIconEle=this.driver.findElement(By.xpath("//*[@id=\"root\"]/div[1]/header/div/div[3]/div[2]/div[1]/button/img"));
+			   WebElement profileIconEle=this.driver.findElement(By.xpath("/html/body/div/div[1]/header/div/div[3]/div[2]/div[1]/button"));
 			   profileIconEle.click();
-			   String coachEmail=this.driver.findElement(By.xpath("/html/body/div/div[1]/header/div/div[3]/div[2]/div[2]/div[1]/p[2]")).getText();
+			   String coachEmail=this.driver.findElement(By.xpath("//*[@id=\"root\"]/div[1]/header/div/div[3]/div[2]/div[2]/div[1]/p[2]")).getText();
+			   System.out.println("Inside Coach Sign up "+coachEmail);
 			   if(coachEmail.equalsIgnoreCase( this.coachemail))
-			   {
+			   {                                       
 				   return true;
 			   }
 			   else
@@ -311,9 +286,16 @@ public class CoachSignUp {
 //			   tenureEle.click();
 //			   
 //		   }
-//			  this. wait.until(ExpectedConditions.visibilityOf(plan));
+//		   WebElement element = wait.until(
+//				    ExpectedConditions.visibilityOfElementLocated(
+//				        By.xpath("/html/body/div/div[1]/div[2]/div/main/div/div/div[2]/form/div[1]/div[3]/div[1]")
+//				    )
+//				);
 //
-//		   plan.click();
+//				// Scroll to element
+//				JavascriptExecutor js = (JavascriptExecutor) driver;
+//				js.executeScript("arguments[0].scrollIntoView({behavior:'smooth', block:'center'});", element);
+//			  this.driver.findElement(By.xpath("/html/body/div/div[1]/div[2]/div/main/div/div/div[2]/form/div[1]/div[3]/div[1]")).click();
 //		   this.wait.until(ExpectedConditions.visibilityOf(ammountEle));
 //		   StringBuilder ammount=new StringBuilder(ammountEle.getText().replaceAll("[^0-9]", ""));
 //		   int temAm=Integer.parseInt(ammount.toString());
@@ -352,11 +334,11 @@ public class CoachSignUp {
 //		  
 //		   }
 //		   
-
-		   	 
-		   
-		   
-		
+//
+//		   	 
+//		   
+//		   
+//		
 //		   this.wait.until(ExpectedConditions.visibilityOf(this.driver.findElement(By.xpath("/html/body/div/div[1]/div/div[3]/div[1]/div[2]/div/div/div/form/div[1]/div/div[2]/label/input"))));
 //		   this.driver.findElement(By.xpath("/html/body/div/div[1]/div/div[3]/div[1]/div[2]/div/div/div/form/div[1]/div/div[2]/label/input")).click();		
 //		   this.driver.findElement(By.xpath("/html/body/div/div[1]/div/div[3]/div[1]/div[2]/div/div/div/form/div[1]/div/div[2]/label/input")).sendKeys("9999999999");
@@ -373,7 +355,10 @@ public class CoachSignUp {
 //		   cardHolderEle.click();
 //		   cardHolderEle.sendKeys("TEST");
 //		   continueElement.click();
-//		   mayBeLater.click();  		   
+//		   mayBeLater.click();  
+//		   return true;
 	   }
+	   
+	 
 
 }

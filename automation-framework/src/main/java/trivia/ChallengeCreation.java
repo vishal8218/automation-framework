@@ -25,23 +25,23 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class ChallengeCreation {
 	
 	private WebDriver driver;
-	HashMap<String ,String>challengeCategory;
-	Actions actions;
-	Random random ;
-    WebDriverWait wait;
+	private HashMap<String ,String>challengeCategory;
+	private Actions actions;
+	private WebDriverWait wait;
 
 	
 	@FindBy(id="name")
 	WebElement challengeNameEle;
-	@FindBy(xpath="/html/body/div[3]/form/div[1]/div/div[1]/div[2]/select")
+	@FindBy(xpath="/html/body/div[3]/form/div[3]/div/div[1]/div[2]/select")
 	WebElement cateSelectEle;
 	@FindBy(id="description")
 	WebElement desc;
-	@FindBy(xpath="/html/body/div[3]/form/div[1]/div/div[3]/div/div/div/div")
+	@FindBy(xpath="/html/body/div[3]/form/div[3]/div/div[3]/div/div/div/div")
 	WebElement imageEle;
-	@FindBy(id="entryFee")
+	@FindBy(id="totalPotAmount")
 	WebElement entryFeeEle;
-	@FindBy(xpath="/html/body/div[3]/form/div[2]/div/div[1]/div[2]/select")
+	
+	@FindBy(xpath="/html/body/div[3]/form/div[4]/div/div[1]/div[2]/select")
 	WebElement durationEle;
 	@FindBy(id="questionRecieve")
 	WebElement requiredQuestionEle;
@@ -49,7 +49,7 @@ public class ChallengeCreation {
 	WebElement minTimeEle;
 	@FindBy(id="seconds")
 	WebElement secTimeEle;
-	@FindBy(xpath="/html/body/div[3]/form/div[3]/div/div[2]/button")
+	@FindBy(xpath="/html/body/div[3]/form/div[5]/div/div[2]/button")
 	WebElement addQuesEle;
 	
 	
@@ -95,13 +95,18 @@ public class ChallengeCreation {
 		this.challengeCategory=new HashMap<String ,String>();
 		challengeCategory.put("Tennis", "6");
 		challengeCategory.put("Soccer", "5");
-		challengeCategory.put("NHL", "4");
-		challengeCategory.put("MLB", "3");
-		challengeCategory.put("NBA", "2");
-		challengeCategory.put("Golf", "1");
+		challengeCategory.put("Esports", "19");
+		challengeCategory.put("Rugby", "18");
+		challengeCategory.put("Baseball", "17");
+		challengeCategory.put("Formula 1", "16");
+		challengeCategory.put("Basketball", "15");
+		challengeCategory.put("Ice Hockey", "14");
+		challengeCategory.put("Cricket", "13");
+		challengeCategory.put("Football", "12");
+		
 		actions=new Actions(this.driver);
-	    this.random=new Random();
-	    wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+	    new Random();
+	    this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 	}
 
 	public void createChallenge(String challengeName, String category, String des,String image, String fee, String completionTime,String req,String timeMin ,String timeSec) throws AWTException
@@ -109,10 +114,10 @@ public class ChallengeCreation {
 		challengeNameEle.sendKeys(challengeName);
 		Select select;
 
-		if(category.equalsIgnoreCase("tennis"))
+		if(category.equalsIgnoreCase("Esports"))
 		{
-			this.driver.findElement(By.xpath("/html/body/div[3]/form/div[1]/div/div[1]/div[2]/button")).click();
-			 actions.sendKeys(Keys.ARROW_DOWN)
+			this.driver.findElement(By.xpath("/html/body/div[3]/form/div[3]/div/div[1]/div[2]/button")).click();
+			 this.actions.sendKeys(Keys.ARROW_DOWN)
 	         .sendKeys(Keys.ENTER)
 	         .perform();
 	
@@ -149,7 +154,7 @@ public class ChallengeCreation {
 	    requiredQuestionEle.sendKeys(req);
 	   
 
-	    wait.until(ExpectedConditions.elementToBeClickable(minTimeEle));
+	   this. wait.until(ExpectedConditions.elementToBeClickable(minTimeEle));
 
 	    minTimeEle.click();
 	    minTimeEle.sendKeys(Keys.CONTROL, "a");
@@ -182,19 +187,19 @@ public class ChallengeCreation {
 			this.driver.findElement(By.xpath("/html/body/div[5]/div[2]/div/div[2]/div/div/div[4]/input")).sendKeys(options.get(3));
 
 
-			 actions.moveToElement(optionEle).perform();
+			 this.actions.moveToElement(optionEle).perform();
 
 
-			    wait.until(ExpectedConditions.elementToBeClickable(  optionEle));
+			    this.wait.until(ExpectedConditions.elementToBeClickable(  optionEle));
 
 
 			  optionEle.click();
              
-			  actions.sendKeys(Keys.ARROW_DOWN)
+			 this. actions.sendKeys(Keys.ARROW_DOWN)
 			         .sendKeys(Keys.ENTER)
 			         .perform();
 			
-			    wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[normalize-space()='Save Question']")));
+			   this. wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[normalize-space()='Save Question']")));
 
             	   this.driver.findElement(By.xpath("//button[normalize-space()='Save Question']")).click();
                
@@ -205,9 +210,9 @@ public class ChallengeCreation {
 
 		}
 		
-//		 actions.moveToElement(this.driver.findElement(By.xpath("/html/body/div[5]/div[1]/div/button"))).perform();
-//		 this.driver.findElement(By.xpath("/html/body/div[5]/div[1]/div/button")).click();
-//		actions.moveToElement(this.driver.findElement(By.xpath("/html/body/div[3]/form/div[6]/button[2]"))).perform();
+//		 this.actions.moveToElement(this.driver.findElement(By.xpath("/html/body/div[5]/div[1]/div/button"))).perform();
+//		 this.driver.findElement(By.xpath("/html/body/div[5]/div[1]/div/button")).click();	
+//		 this.actions.moveToElement(this.driver.findElement(By.xpath("/html/body/div[3]/form/div[6]/button[2]"))).perform();
 //		this.driver.findElement(By.xpath("/html/body/div[3]/form/div[6]/button[2]")).click();
 		
 	

@@ -10,9 +10,11 @@ public class EmailSender {
     public static void sendEmail(String subject,
                                  String messageText) throws Exception {
 
-        final String fromEmail = "vishalevoke27@gmail.com";
-        final String password = "wvic hncq gbcj bxdx"; 
-        final String toEmail = "vk368065@gmail.com";
+    	
+    	ConfigReader configReader=new ConfigReader();
+//        final String fromEmail = "vishalevoke27@gmail.com";
+//        final String password = "wvic hncq gbcj bxdx"; 
+//        final String toEmail = "vk368065@gmail.com";
 
         Properties props = new Properties();
         props.put("mail.smtp.host", "smtp.gmail.com");
@@ -23,15 +25,15 @@ public class EmailSender {
         Session session = Session.getInstance(props,
             new Authenticator() {
                 protected PasswordAuthentication getPasswordAuthentication() {
-                    return new PasswordAuthentication(fromEmail, password);
+                    return new PasswordAuthentication(configReader.getFromEmail(), configReader.getEmailPass());
                 }
             });
 
         Message message = new MimeMessage(session);
-        message.setFrom(new InternetAddress(fromEmail));
+        message.setFrom(new InternetAddress(configReader.getFromEmail()));
         message.setRecipients(
                 Message.RecipientType.TO,
-                InternetAddress.parse(toEmail));
+                InternetAddress.parse(configReader.getToEmail()));
 
         message.setSubject(subject);
 
@@ -40,7 +42,7 @@ public class EmailSender {
 
         MimeBodyPart imagePart = new MimeBodyPart();
         String imagePaths = System.getProperty("user.dir")
-                + "/screenshots/signUp.png";
+                + "/screenshots/" +subject.substring(13)+".png";
 
         imagePart.attachFile(new File(imagePaths));
                 

@@ -24,7 +24,11 @@
     <artifactId>webdrivermanager</artifactId>
     <version>5.8.0</version>
 </dependency>
-
+<dependency>
+    <groupId>com.github.javafaker</groupId>
+    <artifactId>javafaker</artifactId>
+    <version>1.0.2</version>
+</dependency>
     <!-- Source: https://mvnrepository.com/artifact/jakarta.mail/jakarta.mail-api -->
 <!-- Jakarta Mail API -->
 <dependency>
@@ -57,6 +61,29 @@
     <version>5.4.0</version>
     <scope>test</scope>
 </dependency>
+
+
+<dependency>
+        <groupId>com.microsoft.playwright</groupId>
+        <artifactId>playwright</artifactId>
+        <version>1.42.0</version>  <!-- use latest -->
+    </dependency>
+    <dependency>
+    <groupId>io.rest-assured</groupId>
+    <artifactId>rest-assured</artifactId>
+    <version>5.4.0</version>
+    <scope>test</scope>
+</dependency>
+<dependency>
+    <groupId>io.rest-assured</groupId>
+    <artifactId>json-path</artifactId>
+    <version>5.4.0</version>
+</dependency>
+  	<dependency>
+  		<groupId>com.messageSharing</groupId>
+  		<artifactId>Message_Sharing</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
+  	</dependency>
   </dependencies>
   
 

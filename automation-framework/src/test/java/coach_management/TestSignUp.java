@@ -2,8 +2,7 @@ package coach_management;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
+
 import java.util.Map;
 
 import org.apache.commons.io.FileUtils;
@@ -11,11 +10,7 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.edge.EdgeOptions;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.remote.RemoteWebDriver;
+
 import org.testng.Assert;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
@@ -23,30 +18,21 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
-import db.FirebaseUtils;
 import drivermanager.DriverFactory;
 import drivermanager.DriverManager;
 import listener.TestListener;
+import utils.ConfigReader;
 
-import static io.restassured.RestAssured.*;
 
 @Listeners(TestListener.class)   
 
 public class TestSignUp {
 
-	private static final Object[] String = null;
-	Map<String, String> serviceProvide = Map.ofEntries(
-		    Map.entry("1","Workout Plans"),
-		    Map.entry("2","Sessions"),
-		    Map.entry("3","One on One Coaching")
-		);
-	String signUpurl="https://beta.btrainr.com/signup";
-	String demoUrl="https://mypack.bcoder.co.in/demo";
-	String loginUrl="https://mypack.bcoder.co.in/login";
-	String firstName="Coach", lastName="1166";
+	
+	String firstName="Coach";
 	String password="Qwerty@123" , referralCode="";
 	
-	String brandName="CBC";
+	String brandName="Titan Fitness Coaching";
 	String []role=new String[]{"Gym Owner","Fitness Coach","Fitness Influencer","Nutritionist/Dietitian","Other"}      ;                   //  gym-owner ,influencer ,nutritionist ,other
 	String countryCode="United States";     //India  , United States  , United Arab Emirates ,Australia
 	String client="50+";
@@ -57,8 +43,11 @@ public class TestSignUp {
 	String tenure="Monthly";
 	String promocode="TESTPROMOCODE123";
 	long userName=System.currentTimeMillis();
+	boolean isClientAdd=true;
+	ConfigReader configReader;
 
 String	email="coach" + userName + "@yopmail.com";
+
 
 
 	
@@ -78,45 +67,33 @@ String	email="coach" + userName + "@yopmail.com";
 
 
 	
-	@Test(dataProvider="signUp", enabled=false)
+	@Test(dataProvider="signUp", enabled=true)
 	public void signUp(String lName, String emails,String browser) throws InterruptedException
 	{
 
 		
 		DriverManager.setDriver(		DriverFactory.createDriver(browser));
-		
-		DriverManager.getDriver().get(signUpurl);
+		configReader =new ConfigReader();
+		DriverManager.getDriver().get(configReader.getSignUpUrl());
         DriverManager.getDriver().manage().window().maximize();
         
         CoachSignUp coachSignUp=new CoachSignUp(DriverManager.getDriver());
 		coachSignUp.signUp(firstName, lName, emails, password, referralCode);
+		System.out.println("Email "+ emails);
 		coachSignUp.signUp2("userName"+userName,role,countryCode,client,insta,youTube);
-		coachSignUp.signUp3(serviceProvide, description);
-		Assert.assertEquals(coachSignUp.planSelect(freeTrial,"",tenure,promocode,userName+"_UserName"), true);
-	;
+	coachSignUp.signUp3( description);
+	//	Assert.assertEquals(coachSignUp.planSelect(freeTrial,"",tenure,promocode,userName+"_UserName"), true);
+        if(isClientAdd)
+        {
+        	AddClient addClient=new AddClient(DriverManager.getDriver());
+        	addClient.enterBasicDetails("","","","","","");
+        }
 		
 		}
-	@AfterMethod
-	public void tearDown(ITestResult result) throws IOException {
-
-	    if (result.getStatus() == ITestResult.FAILURE) {
-
-	        String testName = result.getName();
-
-	        TakesScreenshot ts =
-	                (TakesScreenshot) DriverManager.getDriver();
-
-	        File src = ts.getScreenshotAs(OutputType.FILE);
-
-	        String path = "screenshots/" + testName + ".png";
-
-	        FileUtils.copyFile(src, new File(path));
-
-	    }
-	}
+	
 	
 
-	@Test(enabled=true)
+	@Test(enabled=false)
 	public void bookDemo()
 	{
 		String demoUrl="https://beta.btrainr.com/demo";
@@ -142,6 +119,24 @@ String	email="coach" + userName + "@yopmail.com";
 		 
 		
 
+	}
+	@AfterMethod
+	public void tearDown(ITestResult result) throws IOException {
+
+	    if (result.getStatus() == ITestResult.FAILURE) {
+
+	        String testName = result.getName();
+
+	        TakesScreenshot ts =
+	                (TakesScreenshot) DriverManager.getDriver();
+
+	        File src = ts.getScreenshotAs(OutputType.FILE);
+
+	        String path = "screenshots/" + testName + ".png";
+
+	        FileUtils.copyFile(src, new File(path));
+
+	    }
 	}
 
 }

@@ -2,6 +2,7 @@ package trivia;
 
 import java.time.Duration;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -23,8 +24,9 @@ public class LoginUser {
 	@FindBy(xpath="//*[@id=\"root\"]/div/div/form/div/div[4]/button")
 	WebElement submitEle;
 	
-	@FindBy(xpath="//*[@id=\"root\"]/div/div/div[2]/div/a[4]")
+	@FindBy(xpath="//*[@id=\"root\"]/div/div/div[2]/div/a[5]/div")
 	WebElement profileIconEle;
+ 
 	
 	@FindBy(xpath="//*[@id=\"root\"]/div/div/div[1]/div[3]/div[1]/div/p")
 	WebElement userDataEle;
@@ -55,7 +57,14 @@ public class LoginUser {
 		 System.out.println(userData);
 		 if(userData.equalsIgnoreCase(email))
 		 {
+			 JavascriptExecutor js = (JavascriptExecutor) driver;
+
+             String token = (String) js.executeScript(
+                 "return window.localStorage.getItem('accessToken');"
+             );
+             System.out.println("Access Tonken "+token);
 			 return true;
+			
 		 }
 		 else
 		 {
