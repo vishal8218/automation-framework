@@ -22,11 +22,12 @@ public class CoachSignUp {
 	   private Actions actions ;
 	  private WebDriverWait wait ;
 	  private String coachemail;
-
+	  private FirebaseUtils firebaseUtils;
 	  
 	   
 	   public CoachSignUp(WebDriver driver)
 	   {
+		   this.firebaseUtils=new  FirebaseUtils();
 		   this.driver=driver;
 		   PageFactory.initElements(driver, this);
 			  actions = new Actions(driver);
@@ -144,7 +145,7 @@ public class CoachSignUp {
 	   @FindBy(xpath="//*[@id=\"root\"]/div[1]/div/main/div/div/div[1]/div[2]/div[4]/button")
 	   WebElement temp;
 
-	   public void signUp(String firstName,String lastName ,String emails,String passWord , String reffralCode)
+	   public void signUp(String firstName,String lastName ,String emails,String passWord , String reffralCode) throws Exception
 	   {
 		   this.coachemail=emails;
 		  fName.click();
@@ -241,7 +242,7 @@ public class CoachSignUp {
 		   descriptionEle.sendKeys(description);
 		   next3.click(); 
 	   }
-	   public boolean planSelect(String typePlan, String planName ,String tenure,String promoCode,String bName)
+	   public String planSelect(String typePlan, String planName ,String tenure,String promoCode,String bName) throws Exception
 	   {
 		   if(typePlan.equalsIgnoreCase("YES"))
 		   {
@@ -261,25 +262,21 @@ public class CoachSignUp {
 			   );
 
 			   skipBtn.click();
-			   this.wait.until(ExpectedConditions.visibilityOf(this.driver.findElement(By.xpath("/html/body/div/div[1]/header/div/div[3]/div[2]/div[1]/button"))));
+				  this.firebaseUtils.saveData(this.coachemail, "Qwerty@123");
 
-			   WebElement profileIconEle=this.driver.findElement(By.xpath("/html/body/div/div[1]/header/div/div[3]/div[2]/div[1]/button"));
+			   this.wait.until(ExpectedConditions.visibilityOf(this.driver.findElement(By.xpath("//*[@id=\"root\"]/div[1]/header/div/div[3]/div[2]/div[1]/button/span"))));
+
+			   WebElement profileIconEle=this.driver.findElement(By.xpath("//*[@id=\"root\"]/div[1]/header/div/div[3]/div[2]/div[1]/button/span"));
 			   profileIconEle.click();
 			   String coachEmail=this.driver.findElement(By.xpath("//*[@id=\"root\"]/div[1]/header/div/div[3]/div[2]/div[2]/div[1]/p[2]")).getText();
 			   System.out.println("Inside Coach Sign up "+coachEmail);
-			   if(coachEmail.equalsIgnoreCase( this.coachemail))
-			   {                                       
-				   return true;
-			   }
-			   else
-			   {
-				   return false;
-			   }
+
+			    return coachEmail;
 
 			   
 		   }
 		   else
-			   return false;
+			   return null;
 		   
 //		   if(tenure.equalsIgnoreCase("Yearly"))
 //		   {

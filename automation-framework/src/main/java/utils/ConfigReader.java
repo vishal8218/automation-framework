@@ -8,13 +8,14 @@ import java.util.Properties;
 public class ConfigReader {
 
     Properties prop;
+    String path="/src/test/resources/config.properties";
 
     public ConfigReader() {
-        prop = new Properties();
+        this.prop = new Properties();
 
         try {
             FileInputStream fis = new FileInputStream(
-                System.getProperty("user.dir") + "/src/test/resources/config.properties"
+                System.getProperty("user.dir") + path
             );
             prop.load(fis);
         } catch (IOException e) {
@@ -50,5 +51,17 @@ public class ConfigReader {
     {
     	return prop.getProperty("adminPass");
 
+    }
+    public String getDbUrl()
+    {
+    	return prop.getProperty("db.url");
+    }
+    public String getCred()
+    {
+    	return prop.getProperty("firebase.credentialFilePath");
+    }
+    public String getCoachPortfolioLink()
+    {
+    	return prop.getProperty("base.coachPortfolio");
     }
 }

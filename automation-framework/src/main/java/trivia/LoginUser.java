@@ -30,6 +30,13 @@ public class LoginUser {
 	
 	@FindBy(xpath="//*[@id=\"root\"]/div/div/div[1]/div[3]/div[1]/div/p")
 	WebElement userDataEle;
+	
+	@FindBy(xpath="//*[@id=\"root\"]/div/div/div[2]/div/a[1]")
+	WebElement marketEle;
+	@FindBy(xpath="//*[@id=\"root\"]/div/div/div[1]/div/div/div[2]/div[2]/button")
+	WebElement joinChallengeEle;
+	@FindBy(xpath="//*[@id=\"root\"]/div/div/div/div[2]/button")
+	WebElement joinChallenge;
 	  private WebDriverWait wait ;
 
 	 public LoginUser(WebDriver driver)
@@ -57,12 +64,7 @@ public class LoginUser {
 		 System.out.println(userData);
 		 if(userData.equalsIgnoreCase(email))
 		 {
-			 JavascriptExecutor js = (JavascriptExecutor) driver;
-
-             String token = (String) js.executeScript(
-                 "return window.localStorage.getItem('accessToken');"
-             );
-             System.out.println("Access Tonken "+token);
+			
 			 return true;
 			
 		 }
@@ -76,6 +78,8 @@ public class LoginUser {
 	  
 	 public boolean attemptChallenge()
 	 {
+		 marketEle.click();
+		 joinChallengeEle.click();
 		 return true;
 	 }
 	

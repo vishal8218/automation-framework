@@ -3,13 +3,12 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="trivia.LoginUserTest">
+      <class name="usermangement.TestAddClient">
         <methods>
-          <include name="browserOpen"/>
-          <include name="login"/>
-          <include name="tearDown"/>
+          <include name="addClient"/>
+          <include name="openBrowser"/>
         </methods>
-      </class> <!-- trivia.LoginUserTest -->
+      </class> <!-- usermangement.TestAddClient -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

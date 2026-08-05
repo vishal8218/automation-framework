@@ -1,78 +1,63 @@
 package db;
 
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
+import com.google.auth.oauth2.GoogleCredentials;
+import com.google.cloud.firestore.Firestore;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.FirebaseOptions;
+import com.google.firebase.cloud.FirestoreClient;
+
+import utils.ConfigReader;
 
 public class FirebaseUtils {
 
-    // Replace with your Firebase database URL
+	ConfigReader configReader;
+	 private Firestore db ;
 
+	 public  FirebaseUtils() {
+		 configReader=new ConfigReader();
+	        try {
+	            FileInputStream serviceAccount = new FileInputStream(configReader.getCred());
 
-    // -------------------------------
-    // INSERT DATA INTO FIREBASE
-    // -------------------------------
-    public static void insertData(String path, String jsonData) {
+	            FirebaseOptions options = FirebaseOptions.builder()
+	            	    .setCredentials(GoogleCredentials.fromStream(new FileInputStream(configReader.getCred())))
+	            	    .setDatabaseUrl(configReader.getDbUrl())
+	            	    .build();
 
-        try {
+	            if (FirebaseApp.getApps().isEmpty()) {
+	                FirebaseApp.initializeApp(options);
+	              
+	                
+	            }
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	    }
+	  public void saveData(String userEmail,String pass) throws Exception
+	    {
+	    	 db =  (Firestore)FirestoreClient.getFirestore();
 
-            URL url = new URL(FirebaseConfig.FIREBASE_DB_URL + path + ".json");
-
-            HttpURLConnection conn =
-                    (HttpURLConnection) url.openConnection();
-
-            conn.setRequestMethod("POST");
-            conn.setRequestProperty("Content-Type", "application/json");
-            conn.setDoOutput(true);
-
-            OutputStream os = conn.getOutputStream();
-            os.write(jsonData.getBytes());
-            os.flush();
-            os.close();
-
-
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-
-    // -------------------------------
-    // GET DATA FROM FIREBASE
-    // -------------------------------
-    public static String getData(String path) {
-
-        StringBuilder result = new StringBuilder();
-
-        try {
-
-            URL url = new URL(FirebaseConfig.FIREBASE_DB_URL + path + ".json");
-
-            HttpURLConnection conn =
-                    (HttpURLConnection) url.openConnection();
-
-            conn.setRequestMethod("GET");
-
-            BufferedReader reader =
-                    new BufferedReader(
-                            new InputStreamReader(conn.getInputStream()));
-
-            String line;
-
-            while ((line = reader.readLine()) != null) {
-                result.append(line);
-            }
-
-            reader.close();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-      System.out.println(result);
-        return result.toString();
-    }
+		        System.out.println("SAVE DATA  "+userEmail);
+	  	  		    Map<String, Object> credentialsData = new HashMap<>();  
+	  	  		    String uuid= UUID.randomUUID().toString();
+	  	  	  	credentialsData .put("userId",uuid);
+  	  		credentialsData .put("email", userEmail);
+	  	  	   credentialsData.put("password", pass);
+	 		    db.collection("CoachData").document(uuid).set(credentialsData);
+//			 
+			
+	  		    
+	    }
+	  
+	 
 
 }

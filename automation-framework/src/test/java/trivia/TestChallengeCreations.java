@@ -27,7 +27,7 @@ import utils.ConfigReader;
 public class TestChallengeCreations {
 	
 	
-	String url="https://admin.trivia.bcoder.co.in/login";
+	private String url="https://admin.trivia.bcoder.co.in/login";
 	private ChallengeCreation challengeCration;
 	private ChromeDriver driver;
 	private  ConfigReader configReader;
@@ -35,14 +35,12 @@ public class TestChallengeCreations {
 	@BeforeTest
 	public void browserOpenAdmin()
 	{
-		
 		this.driver=new ChromeDriver();
-		configReader =new ConfigReader();
-
-		this.driver.get(configReader.getTriviaAdminUrl());
-		driver.manage().window().maximize();
-	this.driver.findElement(By.id("email")).sendKeys(configReader.getAdminEmail());
-	this.driver.findElement(By.id("password")).sendKeys(configReader.getAdminPass());
+		this.configReader =new ConfigReader();
+		this.driver.get(this.configReader.getTriviaAdminUrl());
+		this.driver.manage().window().maximize();
+	this.driver.findElement(By.id("email")).sendKeys(this.configReader.getAdminEmail());
+	this.driver.findElement(By.id("password")).sendKeys(this.configReader.getAdminPass());
 	this.driver.findElement(By.xpath("//*[@id=\"root\"]/div[2]/div/div[2]/div[2]/form/button")).click();
 	WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
@@ -51,45 +49,34 @@ public class TestChallengeCreations {
 	        By.xpath("//*[@id='root']/div[2]/div/div[1]/div[2]/div/div/div[2]/div/ul/li[3]/a")
 	    )
 	);
-
 	element.click();
-
 	this.driver.findElement(By.xpath("//*[@id=\"root\"]/div[2]/div/div[2]/main/div/div[1]/div[2]/button")).click();
 	this.driver.findElement(By.xpath("//*[@id=\"isFree\"]")).click();
 	this.challengeCration=new ChallengeCreation(this.driver);
 
 	}
-	
-	
+
 	@Test
 	public void challengeCre() throws AWTException
 	{
-		String challengeName="Basketball Challenges", category="Basketball", des="des";
-		String image="C:\\Users\\vk368\\Downloads\\NHLS.jpg", fee="200", completionTime="12";
+		String challengeName="Elite Tennis Clash", category="Tennis", des="Experience professional-level competition with challenging matches, leaderboard rankings, and exciting rewards for top performers.";
+		String image="C:\\Users\\vk368\\Downloads\\tennis.jpg", fee="200", completionTime="12";
 		String req="10", timeMin="1" , timeSec="30";
 		int reqAdd=20;
 		this.challengeCration.createChallenge(challengeName, category, des, image, fee, completionTime, req, timeMin, timeSec);		
 		this.challengeCration.addQuestion(reqAdd,category);
 	} 
 	
-//   	@AfterMethod
-//   	public void tearDown(ITestResult result) throws IOException {
-//   
-//   	    if (result.getStatus() == ITestResult.FAILURE) {
-//   
-//   	        String testName = result.getName();
-//   
-//   	        TakesScreenshot ts =
-//   	                (TakesScreenshot) DriverManager.getDriver();
-//   
-//   	        File src = ts.getScreenshotAs(OutputType.FILE);
-//   
-//   	        String path = "screenshots/" + testName + ".png";
-//   
-//   	        FileUtils.copyFile(src, new File(path));
-//   
-//   	    }
-//   	}
-	
-
+   	@AfterMethod
+   	public void tearDown(ITestResult result) throws IOException {
+   
+   	    if (result.getStatus() == ITestResult.FAILURE) {
+   	        String testName = result.getName();
+   	        TakesScreenshot ts =
+   	                (TakesScreenshot) DriverManager.getDriver();
+   	        File src = ts.getScreenshotAs(OutputType.FILE);
+   	        String path = "screenshots/" + testName + ".png";
+   	        FileUtils.copyFile(src, new File(path));
+   	    }
+   	}
 }

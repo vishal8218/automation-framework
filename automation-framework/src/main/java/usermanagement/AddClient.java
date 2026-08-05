@@ -1,4 +1,4 @@
-package coach_management;
+package usermanagement;
 
 
 import java.time.Duration;
@@ -24,7 +24,7 @@ public class AddClient {
 	private String email;
 
 	
-	@FindBy(xpath="/html/body/div/div[1]/div/aside/div/nav/div[1]")
+	@FindBy(xpath="/html/body/div/div[1]/div[1]/aside/div/nav/div[1]/ul/li[3]/a/span[2]")
 	WebElement clientEle;
 	@FindBy(xpath="//button[normalize-space()='New Client']")
 	WebElement newClientEle;
@@ -153,7 +153,7 @@ public class AddClient {
     	return isFormFill;
     }
     
-    public boolean selectGoalsAndSubmit(Map<String, String> keyGoals,String trainerAssign ) throws InterruptedException
+    public String selectGoalsAndSubmit(Map<String, String> keyGoals,String trainerAssign ) throws InterruptedException
 	   {
              
 			//  JavascriptExecutor js = (JavascriptExecutor) this.driver;
@@ -181,15 +181,24 @@ public class AddClient {
 			 
 				 this.actions.moveToElement(createClientEle).perform();
 				 createClientEle.click();
-				   this.wait.until(ExpectedConditions.elementToBeClickable(this.driver.findElement(By.xpath("/html/body/div/div[1]/div/main/div/div/div[3]/div[2]/div[1]/div[1]/div[2]/div/div[1]"))));
-
-				 this.driver.findElement(By.xpath("/html/body/div/div[1]/div/main/div/div/div[3]/div[2]/div[1]/div[1]/div[2]/div/div[1]")).click();
-				 String temEmail=this.driver.findElement(By.xpath("/html/body/div/div[1]/div/main/div/div/div[2]/div/div[2]/div[2]/div[1]/p[2]")).getText();
-				 System.out.println("Get Email "+temEmail);
-				 if(temEmail.equalsIgnoreCase(this.email))
-					 return true;
-				 else
-					 return false;
+				 Thread.sleep(2000);
 				 
+		 WebElement button = wait.until(
+						    ExpectedConditions.elementToBeClickable(
+						        By.cssSelector("div.pb-2 h3")
+						    )
+						);
+
+						((JavascriptExecutor) driver).executeScript(
+						    "arguments[0].scrollIntoView({block:'center'});", 
+						    button
+						);
+
+						Thread.sleep(500);
+
+						button.click();
+						Thread.sleep(500);
+
+					 return this.driver.findElement(By.cssSelector("div.grid p.text-sm.break-all")).getText();
 }
 }

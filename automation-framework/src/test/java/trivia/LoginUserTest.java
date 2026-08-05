@@ -68,6 +68,7 @@ public class LoginUserTest {
             
 
       	   Assert.assertEquals(this. login.isLoginUser(email, pass), true);
+      	   Assert.assertEquals(this.login.attemptChallenge(), true);
       	  
 
       }

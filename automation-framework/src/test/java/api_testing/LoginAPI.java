@@ -2,7 +2,6 @@ package api_testing;
 
 
  import org.json.JSONObject;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 
  import io.restassured.response.Response;

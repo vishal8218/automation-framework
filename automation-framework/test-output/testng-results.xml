@@ -2,31 +2,20 @@
 <testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2026-05-13T10:45:38 IST" name="Default suite" finished-at="2026-05-13T10:45:44 IST" duration-ms="6269">
+  <suite started-at="2026-08-05T12:03:18 IST" name="Default suite" finished-at="2026-08-05T12:04:07 IST" duration-ms="49134">
     <groups>
     </groups>
-    <test started-at="2026-05-13T10:45:38 IST" name="Default test" finished-at="2026-05-13T10:45:44 IST" duration-ms="6269">
-      <class name="trivia.LoginUserTest">
-        <test-method is-config="true" signature="browserOpen()[pri:0, instance:trivia.LoginUserTest@25ce9dc4]" started-at="2026-05-13T10:45:38 IST" name="browserOpen" finished-at="2026-05-13T10:45:43 IST" duration-ms="4731" status="PASS">
+    <test started-at="2026-08-05T12:03:18 IST" name="Default test" finished-at="2026-08-05T12:04:07 IST" duration-ms="49134">
+      <class name="usermangement.TestAddClient">
+        <test-method is-config="true" signature="openBrowser()[pri:0, instance:usermangement.TestAddClient@117159c0]" started-at="2026-08-05T12:03:18 IST" name="openBrowser" finished-at="2026-08-05T12:03:27 IST" duration-ms="8876" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- browserOpen -->
-        <test-method signature="login()[pri:0, instance:trivia.LoginUserTest@25ce9dc4]" started-at="2026-05-13T10:45:43 IST" name="login" finished-at="2026-05-13T10:45:44 IST" duration-ms="1479" status="PASS">
+        </test-method> <!-- openBrowser -->
+        <test-method signature="addClient()[pri:0, instance:usermangement.TestAddClient@117159c0]" started-at="2026-08-05T12:03:27 IST" name="addClient" finished-at="2026-08-05T12:04:07 IST" duration-ms="40202" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- login -->
-        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:trivia.LoginUserTest@25ce9dc4]" started-at="2026-05-13T10:45:44 IST" name="tearDown" finished-at="2026-05-13T10:45:44 IST" duration-ms="3" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[[TestResult name=login status=SUCCESS method=LoginUserTest.login()[pri:0, instance:trivia.LoginUserTest@25ce9dc4] output={null}]]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-      </class> <!-- trivia.LoginUserTest -->
+        </test-method> <!-- addClient -->
+      </class> <!-- usermangement.TestAddClient -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>
