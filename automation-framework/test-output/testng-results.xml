@@ -2,20 +2,20 @@
 <testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2026-08-05T12:03:18 IST" name="Default suite" finished-at="2026-08-05T12:04:07 IST" duration-ms="49134">
+  <suite started-at="2026-08-06T17:45:49 IST" name="Default suite" finished-at="2026-08-06T17:46:07 IST" duration-ms="17916">
     <groups>
     </groups>
-    <test started-at="2026-08-05T12:03:18 IST" name="Default test" finished-at="2026-08-05T12:04:07 IST" duration-ms="49134">
-      <class name="usermangement.TestAddClient">
-        <test-method is-config="true" signature="openBrowser()[pri:0, instance:usermangement.TestAddClient@117159c0]" started-at="2026-08-05T12:03:18 IST" name="openBrowser" finished-at="2026-08-05T12:03:27 IST" duration-ms="8876" status="PASS">
+    <test started-at="2026-08-06T17:45:49 IST" name="Default test" finished-at="2026-08-06T17:46:07 IST" duration-ms="17916">
+      <class name="usermangement.AddLeadFromWeb">
+        <test-method is-config="true" signature="openBrowser()[pri:0, instance:usermangement.AddLeadFromWeb@117159c0]" started-at="2026-08-06T17:45:49 IST" name="openBrowser" finished-at="2026-08-06T17:45:57 IST" duration-ms="7563" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- openBrowser -->
-        <test-method signature="addClient()[pri:0, instance:usermangement.TestAddClient@117159c0]" started-at="2026-08-05T12:03:27 IST" name="addClient" finished-at="2026-08-05T12:04:07 IST" duration-ms="40202" status="PASS">
+        <test-method signature="addLead()[pri:0, instance:usermangement.AddLeadFromWeb@117159c0]" started-at="2026-08-06T17:45:57 IST" name="addLead" finished-at="2026-08-06T17:46:07 IST" duration-ms="10297" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- addClient -->
-      </class> <!-- usermangement.TestAddClient -->
+        </test-method> <!-- addLead -->
+      </class> <!-- usermangement.AddLeadFromWeb -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>
