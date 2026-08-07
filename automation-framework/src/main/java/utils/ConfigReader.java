@@ -64,4 +64,13 @@ public class ConfigReader {
     {
     	return prop.getProperty("base.coachPortfolio");
     }
+    public String getBrowser()
+    {
+    	return prop.getProperty("browser");
+    }
+    public String getSignInUrl()
+    {
+    	return prop.getProperty("base.signIn");
+    }
+    
 }
