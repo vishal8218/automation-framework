@@ -8,7 +8,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repo B
+      - name: Checkout automation-framework
         uses: actions/checkout@v4
 
       - name: Set up JDK
