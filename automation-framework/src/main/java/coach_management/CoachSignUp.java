@@ -160,12 +160,7 @@ public class CoachSignUp {
 //	  referralCode.click();
 //		  referralCode.sendKeys(reffralCode);
 		  next.click();
-		 WebElement toastClose = this.driver.findElement(By.cssSelector("[class*='toast'] button, [role='alert'] button"));
-    if (toastClose.isDisplayed()) {
-        toastClose.click();
-    }
-
-
+		
 		 
 
 
@@ -174,7 +169,12 @@ public class CoachSignUp {
 	   {
 	 
 
-		  
+		   WebElement toastClose = this.driver.findElement(By.cssSelector("[class*='toast'] button, [role='alert'] button"));
+    if (toastClose.isDisplayed()) {
+        toastClose.click();
+    }
+
+
 
 		   wait.until(ExpectedConditions.elementToBeClickable( brandName));
 
