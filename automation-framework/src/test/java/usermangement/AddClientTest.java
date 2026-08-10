@@ -49,8 +49,8 @@ public class AddClientTest {
 	}
 	
 	@AfterTest
-	public void quitBrowser()
+	public void browserClose()
 	{
-		//this.driver.quit();
+		this.driver.quit();
 	}
 }
