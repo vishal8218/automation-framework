@@ -15,19 +15,16 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import db.FirebaseUtils;
 
 public class CoachSignUp {
 	private WebDriver driver;
 	   private Actions actions ;
 	  private WebDriverWait wait ;
 	  private String coachemail;
-	  private FirebaseUtils firebaseUtils;
 	  
 	   
 	   public CoachSignUp(WebDriver driver)
 	   {
-		   this.firebaseUtils=new  FirebaseUtils();
 		   this.driver=driver;
 		   PageFactory.initElements(driver, this);
 			  actions = new Actions(driver);
@@ -262,7 +259,6 @@ public class CoachSignUp {
 			   );
 
 			   skipBtn.click();
-				  this.firebaseUtils.saveData(this.coachemail, "Qwerty@123");
 
 			   this.wait.until(ExpectedConditions.visibilityOf(this.driver.findElement(By.xpath("//*[@id=\"root\"]/div[1]/header/div/div[3]/div[2]/div[1]/button/span"))));
 
