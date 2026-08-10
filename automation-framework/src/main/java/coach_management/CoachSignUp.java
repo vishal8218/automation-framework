@@ -160,6 +160,10 @@ public class CoachSignUp {
 //	  referralCode.click();
 //		  referralCode.sendKeys(reffralCode);
 		  next.click();
+		   wait.until(ExpectedConditions.invisibilityOfElementLocated(
+    By.xpath("//*[contains(text(),'Account created successfully')]")
+));
+
 		 
 
 
