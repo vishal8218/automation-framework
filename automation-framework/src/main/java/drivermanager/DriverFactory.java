@@ -29,6 +29,14 @@ public class DriverFactory {
         WebDriver driver;
         switch (browser.toLowerCase()) {
             case "chrome":
+				  boolean isCI = System.getenv("CI") != null;
+                 if (isCI) {
+                     options.addArguments("--headless=new");
+                     options.addArguments("--no-sandbox");
+                     options.addArguments("--disable-dev-shm-usage");
+                     options.addArguments("--disable-gpu");
+                     options.addArguments("--window-size=1920,1080");
+                 }
                 driver = new ChromeDriver(options);
                 break;
             // add other browsers as needed (firefox, edge, etc.)
