@@ -56,6 +56,13 @@ public class ExcerciseTEST {
 		 
 		 excerciseCreation.clickSave();
 	}
+	 @AfterTest
+	    public void closeBrowser() throws IOException
+	    {
+
+	    	DriverManager.getDriver().quit();
+
+	    }
 
 
 }
