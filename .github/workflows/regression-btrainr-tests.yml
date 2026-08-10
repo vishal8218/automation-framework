@@ -1,0 +1,21 @@
+name: Run Automation Tests
+
+on:
+  repository_dispatch:
+    types: [chatApp-pushed]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo B
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'   # match your project's version
+          distribution: 'temurin'
+
+      - name: Run tests with Maven
+        run: mvn clean test
