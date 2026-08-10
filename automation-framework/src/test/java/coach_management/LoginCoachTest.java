@@ -46,4 +46,11 @@ public class LoginCoachTest {
 		String actualResult=lc.loginCoach("testing1137@yopmail.com", "Qwerty@123");
 		Assert.assertEquals(actualResult, "Coach logged in successfully");
 	}
+	 @AfterTest
+	    public void closeBrowser() throws IOException
+	    {
+
+	    	DriverManager.getDriver().quit();
+
+	    }
 }
