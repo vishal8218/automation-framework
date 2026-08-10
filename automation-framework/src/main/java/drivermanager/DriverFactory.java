@@ -5,7 +5,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.PageLoadStrategy;
-
+import org.openqa.selenium.Dimension;
 
 public class DriverFactory {
 
@@ -40,7 +40,9 @@ public class DriverFactory {
                      options.addArguments("--window-size=1920,1080");
 					 options.setPageLoadStrategy(PageLoadStrategy.EAGER);
                  }
+				
                 driver = new ChromeDriver(options);
+				driver.manage().window().setSize(new Dimension(1920, 1080));
                 break;
             // add other browsers as needed (firefox, edge, etc.)
             default:
