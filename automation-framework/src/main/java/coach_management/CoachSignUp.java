@@ -164,7 +164,7 @@ public class CoachSignUp {
     if (toastClose.isDisplayed()) {
         toastClose.click();
     }
-));
+
 
 		 
 
