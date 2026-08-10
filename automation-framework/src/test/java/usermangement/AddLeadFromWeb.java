@@ -50,6 +50,7 @@ private String diet="veg";
 	public void closeBrowser()
 	{
 		this.driver.quit();
+		DriverManager.getDriver().quit();
 	}
 	
 }
