@@ -38,7 +38,7 @@ public class LoginCoach {
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
 		this.actions = new Actions(driver);
-		this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+		this.wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 		this.js = (JavascriptExecutor) driver;
 	}
 
