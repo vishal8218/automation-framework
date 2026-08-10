@@ -237,15 +237,13 @@ public class CoachSignUp {
 	   public void signUp3(String description ) throws InterruptedException
 	   {
                 
-			  JavascriptExecutor js = (JavascriptExecutor) this.driver;
-			  js.executeScript("window.scrollTo(0, 0)");
-			  Thread.sleep(100);
-			   
-		
-		   
+			 wait.until(ExpectedConditions.elementToBeClickable(descriptionEle));
 		   descriptionEle.click();
 		   descriptionEle.sendKeys(description);
-		   next3.click(); 
+
+		   wait.until(ExpectedConditions.elementToBeClickable(next3));
+		   next3.click();
+
 	   }
 	   public String planSelect(String typePlan, String planName ,String tenure,String promoCode,String bName) throws Exception
 	   {
