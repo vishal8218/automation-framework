@@ -98,12 +98,11 @@ public class TestSignUp {
 				recorder.stop();
 			}
 		}
-	}
-
-	@AfterMethod
-	public void closeBrowser() throws IOException {
 		if (DriverManager.getDriver() != null) {
 			DriverManager.getDriver().quit();
 		}
 	}
+	
+
+	
 }
