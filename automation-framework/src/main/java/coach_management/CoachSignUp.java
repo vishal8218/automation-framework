@@ -160,8 +160,10 @@ public class CoachSignUp {
 //	  referralCode.click();
 //		  referralCode.sendKeys(reffralCode);
 		  next.click();
-		   wait.until(ExpectedConditions.invisibilityOfElementLocated(
-    By.xpath("//*[contains(text(),'Account created successfully')]")
+		 WebElement toastClose = this.driver.findElement(By.cssSelector("[class*='toast'] button, [role='alert'] button"));
+    if (toastClose.isDisplayed()) {
+        toastClose.click();
+    }
 ));
 
 		 
