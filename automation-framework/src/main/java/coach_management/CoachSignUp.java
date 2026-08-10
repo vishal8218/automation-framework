@@ -168,10 +168,18 @@ public class CoachSignUp {
 	   {
 	 
 
-		   this.wait.until(ExpectedConditions.visibilityOf(brandName));
+		   wait.until(ExpectedConditions.visibilityOf(brandName));
+
+		   ((JavascriptExecutor) driver).executeScript(
+		           "arguments[0].scrollIntoView({block:'center', inline:'center'});",
+		           brandName
+		   );
+
+		   wait.until(ExpectedConditions.elementToBeClickable( brandName));
 
 		   brandName.click();
 		   brandName.sendKeys(bName);
+
 		  
 		   for(String tem:accessRole)
 		   {
