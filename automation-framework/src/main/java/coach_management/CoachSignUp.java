@@ -174,12 +174,7 @@ public class CoachSignUp {
 	   {
 	 
 
-		   wait.until(ExpectedConditions.visibilityOf(brandName));
-
-		   ((JavascriptExecutor) driver).executeScript(
-		           "arguments[0].scrollIntoView({block:'center', inline:'center'});",
-		           brandName
-		   );
+		  
 
 		   wait.until(ExpectedConditions.elementToBeClickable( brandName));
 
