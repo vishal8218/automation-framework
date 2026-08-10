@@ -80,11 +80,7 @@
     <artifactId>json-path</artifactId>
     <version>5.4.0</version>
 </dependency>
-  	<dependency>
-  		<groupId>com.messageSharing</groupId>
-  		<artifactId>Message_Sharing</artifactId>
-  		<version>0.0.1-SNAPSHOT</version>
-  	</dependency>
+  	
   	
   	<!-- Source: https://mvnrepository.com/artifact/com.github.stephenc.monte/monte-screen-recorder -->
 <dependency>
