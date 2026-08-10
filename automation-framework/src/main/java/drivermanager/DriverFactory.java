@@ -44,13 +44,12 @@ public class DriverFactory {
                 // render at the same viewport — this is what was causing
                 // "clickable at point (395, 3)": CI's viewport didn't match
                 // what your locators/scroll assumptions were tuned for locally.
-                options.addArguments("--window-size=1920,1080");
-
+options.addArguments("--window-size=3840,2160");
                 driver = new ChromeDriver(options);
 
                 // maximize() is a no-op / can throw in headless mode, so only
                 // call it when we're actually rendering a window (local runs).
-                if (isCI) {
+                if (!isCI) {
                     driver.manage().window().maximize();
                 }
                 break;
