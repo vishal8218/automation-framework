@@ -6,6 +6,8 @@ import java.util.Map;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.AfterTest;
+
 import org.testng.annotations.Test;
 
 import coach_management.CoachSignUp;
