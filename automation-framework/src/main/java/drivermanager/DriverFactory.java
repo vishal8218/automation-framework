@@ -50,7 +50,7 @@ public class DriverFactory {
 
                 // maximize() is a no-op / can throw in headless mode, so only
                 // call it when we're actually rendering a window (local runs).
-                if (!isCI) {
+                if (isCI) {
                     driver.manage().window().maximize();
                 }
                 break;
