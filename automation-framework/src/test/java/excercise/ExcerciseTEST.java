@@ -16,6 +16,8 @@ import drivermanager.DriverFactory;
 import drivermanager.DriverManager;
 import utils.ConfigReader;
 import workout.ExcerciseCreation;
+import java.io.IOException;
+
 
 public class ExcerciseTEST {
 	private LoginCoachTest loginCoachTest;
