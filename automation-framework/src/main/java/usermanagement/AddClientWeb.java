@@ -24,7 +24,7 @@ public class AddClientWeb {
 	 private Actions actions ;
 	  private WebDriverWait wait ;
 	  private String number ,email;
-	@FindBy(xpath="/html/body/div/div[1]/section[1]/div/div[1]/div/div/button")
+	 @FindBy(xpath = "//button[normalize-space()='Get Started']")
 	WebElement getStatred;
 	
 	@FindBy(css="#radix-\\:r6\\:-content-phone > div > input")
@@ -62,7 +62,7 @@ public class AddClientWeb {
 	WebElement nextEle3;
 	@FindBy(xpath="//*[@id=\"root\"]/div[1]/div/main/div/div/div[2]/div[2]/button[2]")
     WebElement nextEle4;
-	@FindBy(xpath="//*[@id=\"root\"]/div[1]/div/main/div/div/div[2]/div[2]/button[3]")
+	@FindBy(xpath="//button[normalize-space()='Continue']")
 	WebElement nextEle5;
 	@FindBy(xpath="//*[@id=\"root\"]/div[1]/div/main/div/div/div/div/div[1]/div[2]/div[2]/div/div[2]")
 	WebElement planEle;
