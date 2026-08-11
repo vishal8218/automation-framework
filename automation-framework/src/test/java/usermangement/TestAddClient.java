@@ -23,7 +23,7 @@ public class TestAddClient {
 	private String email = "user" + userName + "@yopmail.com";
 	private String fName = "firstName";
 	private String lName = "lastName";
-	private String phone = "98701282904";
+	private String phone = "90701282904";
 	private int age = 35;
 	private int height = 172, weight = 90;
 	private String goals[] = new String[] { "Loose Weight", "Build Muscle" };
