@@ -47,6 +47,7 @@ public class DriverFactory {
 
             // No maximize() call — it would override --window-size and
             // defeat the point of pinning both environments to the same viewport.
+            System.out.println("Window size in THIS test: " + driver.manage().window().getSize());
             break;
 
         default:
