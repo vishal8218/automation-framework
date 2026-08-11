@@ -30,8 +30,7 @@ public class DriverFactory {
             options.addArguments("--force-device-scale-factor=1");
             options.addArguments("--disable-notifications");
             options.addArguments("--disable-infobars");
-            options.setPageLoadStrategy(PageLoadStrategy.EAGER);
-
+   options.setPageLoadStrategy(PageLoadStrategy.NORMAL);
             if (isCI) {
                 options.addArguments("--headless=new");
                 options.addArguments("--no-sandbox");
