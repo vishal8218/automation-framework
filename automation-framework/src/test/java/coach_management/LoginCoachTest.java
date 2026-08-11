@@ -38,11 +38,11 @@ public class LoginCoachTest {
 		// Pass options into driver creation — single driver instance
 		DriverManager.setDriver(DriverFactory.createDriverPermisson(configReader.getBrowser(), options));
 
-		DriverManager.getDriver().manage().window().maximize();
+		//DriverManager.getDriver().manage().window().maximize();
 		DriverManager.getDriver().get(configReader.getSignInUrl());
 
-		this.driver = DriverManager.getDriver();
-		lc = new LoginCoach(this.driver);
+		// this.driver = DriverManager.getDriver();
+		lc = new LoginCoach(DriverManager.getDriver());
 	}
 	@Test 
 	public void loginCoach() throws InterruptedException
