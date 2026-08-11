@@ -21,41 +21,37 @@ public class DriverFactory {
         return driver;
     }
 
-    public static WebDriver createDriverPermisson(String browser, ChromeOptions options) {
-        WebDriver driver;
-        switch (browser.toLowerCase()) {
-            case "chrome":
-                boolean isCI = System.getenv("CI") != null;
+ public static WebDriver createDriverPermisson(String browser, ChromeOptions options) {
+    WebDriver driver;
+    switch (browser.toLowerCase()) {
+        case "chrome":
+            boolean isCI = System.getenv("CI") != null;
 
-                // Stability flags that apply whether or not we're headless.
-                options.addArguments("--force-device-scale-factor=1");
-                options.addArguments("--disable-notifications");
-                options.addArguments("--disable-infobars");
-                options.setPageLoadStrategy(PageLoadStrategy.EAGER);
+            options.addArguments("--force-device-scale-factor=1");
+            options.addArguments("--disable-notifications");
+            options.addArguments("--disable-infobars");
+            options.setPageLoadStrategy(PageLoadStrategy.EAGER);
 
-                if (isCI) {
-                    options.addArguments("--headless=new");
-                    options.addArguments("--no-sandbox");
-                    options.addArguments("--disable-dev-shm-usage");
-                    options.addArguments("--disable-gpu");
-                }
+            if (isCI) {
+                options.addArguments("--headless=new");
+                options.addArguments("--no-sandbox");
+                options.addArguments("--disable-dev-shm-usage");
+                options.addArguments("--disable-gpu");
+            }
 
-                // Set window size explicitly in BOTH modes so local and CI
-                // render at the same viewport — this is what was causing
-                // "clickable at point (395, 3)": CI's viewport didn't match
-                // what your locators/scroll assumptions were tuned for locally.
-options.addArguments("--window-size=3840,2160");
-                driver = new ChromeDriver(options);
+            // Applies in both environments — headless CI gets the exact size,
+            // local gets clamped to your monitor's real resolution (expected).
+            options.addArguments("--window-size=1920,1080");
 
-                // maximize() is a no-op / can throw in headless mode, so only
-                // call it when we're actually rendering a window (local runs).
-              
-                break;
+            driver = new ChromeDriver(options);
 
-            // add other browsers as needed (firefox, edge, etc.)
-            default:
-                throw new IllegalArgumentException("Unsupported browser: " + browser);
-        }
-        return driver;
+            // No maximize() call — it would override --window-size and
+            // defeat the point of pinning both environments to the same viewport.
+            break;
+
+        default:
+            throw new IllegalArgumentException("Unsupported browser: " + browser);
     }
+    return driver;
+}
 }
