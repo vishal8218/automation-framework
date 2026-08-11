@@ -91,12 +91,7 @@ public class AddClientWeb {
 		lastName.sendKeys(lName);
 		emailEle.sendKeys(email);
 		nextEle.click();	
-		 WebElement toast = this.driver.findElement(
-            By.xpath("//*[contains(@class,'toast') or @role='alert' or @role='status']")
-        );
-        if (toast.isDisplayed()) {
-            wait.until(ExpectedConditions.invisibilityOf(toast));
-        }
+		
 	}
 	
 	public void enterPhysicalDetail(String gen,int age,String profession)
