@@ -168,18 +168,10 @@ public class CoachSignUp {
 	   public void signUp2(String bName,String accessRole[],String currencyType,String clinet,String insta,String youtube)
 	   {
 	 
-
-	
-    }
-
-
-
 		   wait.until(ExpectedConditions.elementToBeClickable( brandName));
-
 		   brandName.click();
 		   brandName.sendKeys(bName);
 
-		  
 		   for(String tem:accessRole)
 		   {
 			   if(tem.equalsIgnoreCase("Fitness Coach"))
@@ -233,6 +225,7 @@ public class CoachSignUp {
 	       youTube.sendKeys(youtube);
     next2.click();  
     }
+
 	   public void signUp3(String description ) throws InterruptedException
 	   {
                 
