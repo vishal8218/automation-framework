@@ -169,9 +169,7 @@ public class CoachSignUp {
 	   {
 	 
 
-		   WebElement toastClose = this.driver.findElement(By.cssSelector("[class*='toast'] button, [role='alert'] button"));
-    if (toastClose.isDisplayed()) {
-        toastClose.click();
+	
     }
 
 
