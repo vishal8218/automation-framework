@@ -49,9 +49,7 @@ options.addArguments("--window-size=3840,2160");
 
                 // maximize() is a no-op / can throw in headless mode, so only
                 // call it when we're actually rendering a window (local runs).
-                if (!isCI) {
-                    driver.manage().window().maximize();
-                }
+              
                 break;
 
             // add other browsers as needed (firefox, edge, etc.)
